@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/Lead.API/">
+    <Project Path="Lead.API\Lead.Api.csproj" DefaultStartup="true" />
+  </Folder>
+  <Project Path="Lead.Utility\Lead.Utility.csproj" />
+  <Project Path="Lead.App\Lead.App.csproj" />
+  <Project Path="Lead.Domain\Lead.Domain.csproj" />
+</Solution>
