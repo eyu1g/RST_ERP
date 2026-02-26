@@ -1,0 +1,16 @@
+C:\Users\hp\source\repos\RST_ERP\CRM\Crm.Lead\Lead.Utilities\bin\Release\net8.0\Lead.Utilities.deps.json
+C:\Users\hp\source\repos\RST_ERP\CRM\Crm.Lead\Lead.Utilities\bin\Release\net8.0\Lead.Utilities.dll
+C:\Users\hp\source\repos\RST_ERP\CRM\Crm.Lead\Lead.Utilities\bin\Release\net8.0\Lead.Utilities.pdb
+C:\Users\hp\source\repos\RST_ERP\CRM\Crm.Lead\Lead.Utilities\bin\Release\net8.0\Lead.Domain.dll
+C:\Users\hp\source\repos\RST_ERP\CRM\Crm.Lead\Lead.Utilities\bin\Release\net8.0\Lead.Domain.pdb
+C:\Users\hp\source\repos\RST_ERP\CRM\Crm.Lead\Lead.Utilities\obj\Release\net8.0\Lead.Utilities.csproj.AssemblyReference.cache
+C:\Users\hp\source\repos\RST_ERP\CRM\Crm.Lead\Lead.Utilities\obj\Release\net8.0\Lead.Utilities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\source\repos\RST_ERP\CRM\Crm.Lead\Lead.Utilities\obj\Release\net8.0\Lead.Utilities.AssemblyInfoInputs.cache
+C:\Users\hp\source\repos\RST_ERP\CRM\Crm.Lead\Lead.Utilities\obj\Release\net8.0\Lead.Utilities.AssemblyInfo.cs
+C:\Users\hp\source\repos\RST_ERP\CRM\Crm.Lead\Lead.Utilities\obj\Release\net8.0\Lead.Utilities.csproj.CoreCompileInputs.cache
+C:\Users\hp\source\repos\RST_ERP\CRM\Crm.Lead\Lead.Utilities\obj\Release\net8.0\Lead.Utilities.sourcelink.json
+C:\Users\hp\source\repos\RST_ERP\CRM\Crm.Lead\Lead.Utilities\obj\Release\net8.0\Lead.Uti.D6FDC5B4.Up2Date
+C:\Users\hp\source\repos\RST_ERP\CRM\Crm.Lead\Lead.Utilities\obj\Release\net8.0\Lead.Utilities.dll
+C:\Users\hp\source\repos\RST_ERP\CRM\Crm.Lead\Lead.Utilities\obj\Release\net8.0\refint\Lead.Utilities.dll
+C:\Users\hp\source\repos\RST_ERP\CRM\Crm.Lead\Lead.Utilities\obj\Release\net8.0\Lead.Utilities.pdb
+C:\Users\hp\source\repos\RST_ERP\CRM\Crm.Lead\Lead.Utilities\obj\Release\net8.0\ref\Lead.Utilities.dll

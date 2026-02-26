@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lead.Utility</name>
+    </assembly>
+    <members>
+        <member name="T:Lead.Utility.Persistence.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Lead.Utility.Persistence.Migrations.AddLeadUiFields">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.AddLeadUiFields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.AddLeadUiFields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.AddLeadUiFields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Lead.Utility.Persistence.Migrations.AddLeadGrouping">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.AddLeadGrouping.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.AddLeadGrouping.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.AddLeadGrouping.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Lead.Utility.Persistence.Migrations.AddLeadAssignment">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.AddLeadAssignment.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.AddLeadAssignment.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.AddLeadAssignment.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
