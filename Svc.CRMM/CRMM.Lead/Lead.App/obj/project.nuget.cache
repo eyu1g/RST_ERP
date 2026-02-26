@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wH2DZoNXXXs=",
+  "dgSpecHash": "AHb8Wtwifw8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\hp\\source\\repos\\RST_ERP\\Svc.CRMM\\CRMM.Lead\\Lead.App\\Lead.App.csproj",
+  "projectFilePath": "C:\\Users\\hp\\Desktop\\RST_ERP\\Svc.CRMM\\CRMM.Lead\\Lead.App\\Lead.App.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.entityframeworkcore\\10.0.1\\microsoft.entityframeworkcore.10.0.1.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\10.0.1\\microsoft.entityframeworkcore.abstractions.10.0.1.nupkg.sha512",

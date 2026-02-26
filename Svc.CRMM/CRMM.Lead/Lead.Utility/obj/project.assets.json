@@ -3968,11 +3968,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hp\\source\\repos\\RST_ERP\\Svc.CRMM\\CRMM.Lead\\Lead.Utility\\Lead.Utility.csproj",
+      "projectUniqueName": "C:\\Users\\hp\\Desktop\\RST_ERP\\Svc.CRMM\\CRMM.Lead\\Lead.Utility\\Lead.Utility.csproj",
       "projectName": "Lead.Utility",
-      "projectPath": "C:\\Users\\hp\\source\\repos\\RST_ERP\\Svc.CRMM\\CRMM.Lead\\Lead.Utility\\Lead.Utility.csproj",
+      "projectPath": "C:\\Users\\hp\\Desktop\\RST_ERP\\Svc.CRMM\\CRMM.Lead\\Lead.Utility\\Lead.Utility.csproj",
       "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hp\\source\\repos\\RST_ERP\\Svc.CRMM\\CRMM.Lead\\Lead.Utility\\obj\\",
+      "outputPath": "C:\\Users\\hp\\Desktop\\RST_ERP\\Svc.CRMM\\CRMM.Lead\\Lead.Utility\\obj\\",
       "projectStyle": "PackageReference",
       "centralPackageVersionsManagementEnabled": true,
       "fallbackFolders": [
@@ -3994,8 +3994,8 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "C:\\Users\\hp\\source\\repos\\RST_ERP\\Svc.CRMM\\CRMM.Lead\\Lead.App\\Lead.App.csproj": {
-              "projectPath": "C:\\Users\\hp\\source\\repos\\RST_ERP\\Svc.CRMM\\CRMM.Lead\\Lead.App\\Lead.App.csproj"
+            "C:\\Users\\hp\\Desktop\\RST_ERP\\Svc.CRMM\\CRMM.Lead\\Lead.App\\Lead.App.csproj": {
+              "projectPath": "C:\\Users\\hp\\Desktop\\RST_ERP\\Svc.CRMM\\CRMM.Lead\\Lead.App\\Lead.App.csproj"
             }
           }
         }
