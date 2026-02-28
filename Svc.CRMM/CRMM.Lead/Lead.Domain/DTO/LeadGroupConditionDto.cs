@@ -7,5 +7,5 @@ public sealed record LeadGroupConditionDto(
     string Field,
     string Operator,
     string Value,
-    DateTimeOffset CreatedAt,
-    DateTimeOffset UpdatedAt);
+    DateTime CreatedAt,
+    DateTime UpdatedAt);

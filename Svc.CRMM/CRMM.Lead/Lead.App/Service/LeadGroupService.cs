@@ -73,15 +73,17 @@ public sealed class LeadGroupService
 
     public async Task<LeadGroupDto> CreateAsync(CreateLeadGroupRequest request, CancellationToken cancellationToken)
     {
-        var now = DateTimeOffset.UtcNow;
+        var now = DateTime.UtcNow;
 
-        var entity = new LeadGroupEntity(
-            id: Guid.NewGuid(),
-            code: request.Code,
-            name: request.Name,
-            isActive: request.IsActive,
-            createdAt: now,
-            updatedAt: now);
+        var entity = new LeadGroupEntity
+        {
+            Id = Guid.NewGuid(),
+            Code = request.Code,
+            Name = request.Name,
+            IsActive = request.IsActive,
+            CreatedAt = now,
+            UpdatedAt = now
+        };
 
         _db.LeadGroups.Add(entity);
         await _db.SaveChangesAsync(cancellationToken);
@@ -97,8 +99,11 @@ public sealed class LeadGroupService
             return null;
         }
 
-        var now = DateTimeOffset.UtcNow;
-        entity.Update(request.Code, request.Name, request.IsActive, now);
+        var now = DateTime.UtcNow;
+        entity.Code = request.Code;
+        entity.Name = request.Name;
+        entity.IsActive = request.IsActive;
+        entity.UpdatedAt = now;
 
         await _db.SaveChangesAsync(cancellationToken);
 
@@ -150,16 +155,18 @@ public sealed class LeadGroupService
             throw new InvalidOperationException("LeadGroup not found.");
         }
 
-        var now = DateTimeOffset.UtcNow;
-        var entity = new LeadGroupConditionEntity(
-            id: Guid.NewGuid(),
-            leadGroupId: leadGroupId,
-            sortOrder: request.SortOrder,
-            field: request.Field,
-            @operator: request.Operator,
-            value: request.Value,
-            createdAt: now,
-            updatedAt: now);
+        var now = DateTime.UtcNow;
+        var entity = new LeadGroupConditionEntity
+        {
+            Id = Guid.NewGuid(),
+            LeadGroupId = leadGroupId,
+            SortOrder = request.SortOrder,
+            Field = request.Field,
+            Operator = request.Operator,
+            Value = request.Value,
+            CreatedAt = now,
+            UpdatedAt = now
+        };
 
         _db.LeadGroupConditions.Add(entity);
         await _db.SaveChangesAsync(cancellationToken);
@@ -175,8 +182,12 @@ public sealed class LeadGroupService
             return null;
         }
 
-        var now = DateTimeOffset.UtcNow;
-        entity.Update(request.SortOrder, request.Field, request.Operator, request.Value, now);
+        var now = DateTime.UtcNow;
+        entity.SortOrder = request.SortOrder;
+        entity.Field = request.Field;
+        entity.Operator = request.Operator;
+        entity.Value = request.Value;
+        entity.UpdatedAt = now;
         await _db.SaveChangesAsync(cancellationToken);
 
         return ToDto(entity);

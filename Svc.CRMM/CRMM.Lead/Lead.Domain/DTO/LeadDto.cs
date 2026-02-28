@@ -18,5 +18,5 @@ public sealed record LeadDto(
     Guid StageId,
     Guid? AssignedToUserId,
     string? AssignedToName,
-    DateTimeOffset CreatedAt,
-    DateTimeOffset UpdatedAt);
+    DateTime CreatedAt,
+    DateTime UpdatedAt);

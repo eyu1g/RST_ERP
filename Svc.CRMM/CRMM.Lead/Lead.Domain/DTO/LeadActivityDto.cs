@@ -5,4 +5,4 @@ public sealed record LeadActivityDto(
     Guid LeadId,
     string ActivityType,
     string? Notes,
-    DateTimeOffset ActivityAt);
+    DateTime ActivityAt);

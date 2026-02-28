@@ -1,23 +1,10 @@
 namespace Lead.Domain.Entities;
 
-public sealed class LeadConversionLog
+public class LeadConversionLog : BaseEntity
 {
-    public Guid Id { get; private set; }
-    public Guid LeadId { get; private set; }
-    public string ConvertedTo { get; private set; } = string.Empty;
-    public Guid? TargetId { get; private set; }
-    public string? ConvertedBy { get; private set; }
-    public DateTimeOffset ConvertedAt { get; private set; }
-
-    private LeadConversionLog() { }
-
-    public LeadConversionLog(Guid id, Guid leadId, string convertedTo, Guid? targetId, string? convertedBy, DateTimeOffset convertedAt)
-    {
-        Id = id;
-        LeadId = leadId;
-        ConvertedTo = convertedTo;
-        TargetId = targetId;
-        ConvertedBy = convertedBy;
-        ConvertedAt = convertedAt;
-    }
+    public Guid LeadId { get;set; }
+    public string ConvertedTo { get;set; } = default!;
+    public Guid? TargetId { get;set; }
+    public string? ConvertedBy { get;set; }
+    public DateTime ConvertedAt { get;set; }
 }

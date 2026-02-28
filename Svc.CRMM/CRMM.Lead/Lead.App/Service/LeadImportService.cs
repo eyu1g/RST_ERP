@@ -77,7 +77,7 @@ public sealed class LeadImportService
                 var assignedToUserId = GetGuidNullable(values, headerIndex, "AssignedToUserId");
                 var assignedToName = GetString(values, headerIndex, "AssignedToName");
 
-                var now = DateTimeOffset.UtcNow;
+                var now = DateTime.UtcNow;
 
                 var chosenSourceId = sourceId ?? _db.LeadSources.Select(x => x.Id).FirstOrDefault();
                 var chosenStatusId = statusId ?? _db.LeadStatuses.OrderBy(x => x.SortOrder).Select(x => x.Id).FirstOrDefault();
@@ -98,26 +98,28 @@ public sealed class LeadImportService
                     throw new InvalidOperationException("No LeadStage rows exist.");
                 }
 
-                var lead = new LeadEntity(
-                    id: Guid.NewGuid(),
-                    leadNo: LeadNoGenerator.NewLeadNo(now),
-                    firstName: firstName,
-                    lastName: lastName,
-                    companyName: companyName,
-                    companySize: companySize,
-                    jobTitle: jobTitle,
-                    industry: industry,
-                    budget: budget,
-                    timeline: timeline,
-                    email: email,
-                    phone: phone,
-                    sourceId: chosenSourceId,
-                    statusId: chosenStatusId,
-                    stageId: chosenStageId,
-                    assignedToUserId: assignedToUserId,
-                    assignedToName: assignedToName,
-                    createdAt: now,
-                    updatedAt: now);
+                var lead = new LeadEntity
+                {
+                    Id = Guid.NewGuid(),
+                    LeadNo = LeadNoGenerator.NewLeadNo(now),
+                    FirstName = firstName,
+                    LastName = lastName,
+                    CompanyName = companyName,
+                    CompanySize = companySize,
+                    JobTitle = jobTitle,
+                    Industry = industry,
+                    Budget = budget,
+                    Timeline = timeline,
+                    Email = email,
+                    Phone = phone,
+                    SourceId = chosenSourceId,
+                    StatusId = chosenStatusId,
+                    StageId = chosenStageId,
+                    AssignedToUserId = assignedToUserId,
+                    AssignedToName = assignedToName,
+                    CreatedAt = now,
+                    UpdatedAt = now
+                };
 
                 _db.Leads.Add(lead);
                 createdCount++;
