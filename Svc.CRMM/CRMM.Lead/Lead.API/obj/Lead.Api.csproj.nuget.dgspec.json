@@ -65,6 +65,16 @@
               "version": "[8.1.1, )",
               "versionCentrallyManaged": true
             },
+            "MediatR": {
+              "target": "Package",
+              "version": "[11.1.0, )",
+              "versionCentrallyManaged": true
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.1.0, )",
+              "versionCentrallyManaged": true
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.1, )",
@@ -104,7 +114,8 @@
             "Google.Protobuf": "3.33.2",
             "Grpc.AspNetCore": "2.76.0",
             "Grpc.Tools": "2.76.0",
-            "MediatR": "14.0.0",
+            "MediatR": "11.1.0",
+            "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
             "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.1",
             "Microsoft.AspNetCore.Http.Abstractions": "2.3.0",
             "Microsoft.AspNetCore.Http.Features": "5.0.17",
@@ -646,7 +657,8 @@
             "Google.Protobuf": "3.33.2",
             "Grpc.AspNetCore": "2.76.0",
             "Grpc.Tools": "2.76.0",
-            "MediatR": "14.0.0",
+            "MediatR": "11.1.0",
+            "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
             "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.1",
             "Microsoft.AspNetCore.Http.Abstractions": "2.3.0",
             "Microsoft.AspNetCore.Http.Features": "5.0.17",
@@ -1034,7 +1046,8 @@
             "Google.Protobuf": "3.33.2",
             "Grpc.AspNetCore": "2.76.0",
             "Grpc.Tools": "2.76.0",
-            "MediatR": "14.0.0",
+            "MediatR": "11.1.0",
+            "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
             "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.1",
             "Microsoft.AspNetCore.Http.Abstractions": "2.3.0",
             "Microsoft.AspNetCore.Http.Features": "5.0.17",
@@ -1459,7 +1472,8 @@
             "Google.Protobuf": "3.33.2",
             "Grpc.AspNetCore": "2.76.0",
             "Grpc.Tools": "2.76.0",
-            "MediatR": "14.0.0",
+            "MediatR": "11.1.0",
+            "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
             "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.1",
             "Microsoft.AspNetCore.Http.Abstractions": "2.3.0",
             "Microsoft.AspNetCore.Http.Features": "5.0.17",

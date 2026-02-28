@@ -25,7 +25,7 @@ public sealed class CreateLeadCommand
 
         var statusId = request.StatusId ?? await _db.LeadStatuses
             .AsNoTracking()
-            .OrderBy(x => x.SortOrder)
+            .OrderBy(x => x.Priority)
             .Select(x => x.Id)
             .FirstOrDefaultAsync(cancellationToken);
 

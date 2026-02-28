@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "WB+5CnYyzEk=",
+  "dgSpecHash": "kK7pFfQ0pS4=",
   "success": true,
   "projectFilePath": "C:\\Users\\hp\\Desktop\\RST_ERP\\Svc.CRMM\\CRMM.Lead\\Lead.API\\Lead.Api.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,9 @@
     "C:\\Users\\hp\\.nuget\\packages\\asp.versioning.mvc\\8.1.1\\asp.versioning.mvc.8.1.1.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\asp.versioning.mvc.apiexplorer\\8.1.1\\asp.versioning.mvc.apiexplorer.8.1.1.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\mediatr\\11.1.0\\mediatr.11.1.0.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\11.1.0\\mediatr.extensions.microsoft.dependencyinjection.11.1.0.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.1\\microsoft.aspnetcore.openapi.10.0.1.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.build\\17.7.2\\microsoft.build.17.7.2.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.build.framework\\17.14.28\\microsoft.build.framework.17.14.28.nupkg.sha512",

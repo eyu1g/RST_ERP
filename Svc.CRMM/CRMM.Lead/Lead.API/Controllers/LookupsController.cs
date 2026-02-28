@@ -1,5 +1,6 @@
-using Lead.Api.Queries;
+using Lead.Api.Mediator;
 using Lead.Domain.DTO;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lead.Api.Controllers;
@@ -8,31 +9,31 @@ namespace Lead.Api.Controllers;
 [Route("api/crmm/lead/v{version:apiVersion}/lookups")]
 public sealed class LookupsController : ControllerBase
 {
-    private readonly LookupQueries _queries;
+    private readonly IMediator _mediator;
 
-    public LookupsController(LookupQueries queries)
+    public LookupsController(IMediator mediator)
     {
-        _queries = queries;
+        _mediator = mediator;
     }
 
     [HttpGet("statuses")]
     public async Task<ActionResult<IReadOnlyList<LookupItemDto>>> ListStatuses(CancellationToken cancellationToken)
     {
-        var items = await _queries.ListStatusesAsync(cancellationToken);
+        var items = await _mediator.Send(new LookupsRequests.ListLeadStatusesQuery(), cancellationToken);
         return Ok(items);
     }
 
     [HttpGet("sources")]
     public async Task<ActionResult<IReadOnlyList<LookupItemDto>>> ListSources(CancellationToken cancellationToken)
     {
-        var items = await _queries.ListSourcesAsync(cancellationToken);
+        var items = await _mediator.Send(new LookupsRequests.ListLeadSourcesQuery(), cancellationToken);
         return Ok(items);
     }
 
     [HttpGet("stages")]
     public async Task<ActionResult<IReadOnlyList<LookupItemDto>>> ListStages(CancellationToken cancellationToken)
     {
-        var items = await _queries.ListStagesAsync(cancellationToken);
+        var items = await _mediator.Send(new LookupsRequests.ListLeadStagesQuery(), cancellationToken);
         return Ok(items);
     }
 }

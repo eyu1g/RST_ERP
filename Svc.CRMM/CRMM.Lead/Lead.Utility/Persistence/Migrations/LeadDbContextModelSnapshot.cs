@@ -152,6 +152,12 @@ namespace Lead.Utility.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("AssignToName")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("AssignToUserId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("DateAdd")
                         .HasColumnType("timestamp with time zone");
 
@@ -167,6 +173,9 @@ namespace Lead.Utility.Persistence.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer");
 
                     b.Property<byte[]>("RowVersion")
                         .IsRequired()
@@ -332,6 +341,40 @@ namespace Lead.Utility.Persistence.Migrations
                     b.ToTable("LeadGroupConditions");
                 });
 
+            modelBuilder.Entity("Lead.Domain.Entities.LeadIndustry", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DateAdd")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("DateMod")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LeadIndustries");
+                });
+
             modelBuilder.Entity("Lead.Domain.Entities.LeadMergeLog", b =>
                 {
                     b.Property<Guid>("Id")
@@ -366,6 +409,90 @@ namespace Lead.Utility.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LeadMergeLogs");
+                });
+
+            modelBuilder.Entity("Lead.Domain.Entities.LeadRoutingRule", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AssignToName")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("AssignToUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DateAdd")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("DateMod")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LeadRoutingRules");
+                });
+
+            modelBuilder.Entity("Lead.Domain.Entities.LeadRoutingRuleCondition", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DateAdd")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("DateMod")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Field")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("LeadRoutingRuleId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Operator")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LeadRoutingRuleId");
+
+                    b.ToTable("LeadRoutingRuleConditions");
                 });
 
             modelBuilder.Entity("Lead.Domain.Entities.LeadScoreHistory", b =>
@@ -404,6 +531,46 @@ namespace Lead.Utility.Persistence.Migrations
                     b.ToTable("LeadScoreHistories");
                 });
 
+            modelBuilder.Entity("Lead.Domain.Entities.LeadScoringRule", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DateAdd")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("DateMod")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("MaxPoints")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("WeightPercent")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LeadScoringRules");
+                });
+
             modelBuilder.Entity("Lead.Domain.Entities.LeadSource", b =>
                 {
                     b.Property<Guid>("Id")
@@ -416,6 +583,9 @@ namespace Lead.Utility.Persistence.Migrations
                     b.Property<DateTime?>("DateMod")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
@@ -426,6 +596,9 @@ namespace Lead.Utility.Persistence.Migrations
                     b.Property<byte[]>("RowVersion")
                         .IsRequired()
                         .HasColumnType("bytea");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -488,12 +661,12 @@ namespace Lead.Utility.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer");
+
                     b.Property<byte[]>("RowVersion")
                         .IsRequired()
                         .HasColumnType("bytea");
-
-                    b.Property<int>("SortOrder")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -538,7 +711,23 @@ namespace Lead.Utility.Persistence.Migrations
                     b.Navigation("LeadGroup");
                 });
 
+            modelBuilder.Entity("Lead.Domain.Entities.LeadRoutingRuleCondition", b =>
+                {
+                    b.HasOne("Lead.Domain.Entities.LeadRoutingRule", "LeadRoutingRule")
+                        .WithMany("Conditions")
+                        .HasForeignKey("LeadRoutingRuleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("LeadRoutingRule");
+                });
+
             modelBuilder.Entity("Lead.Domain.Entities.LeadGroup", b =>
+                {
+                    b.Navigation("Conditions");
+                });
+
+            modelBuilder.Entity("Lead.Domain.Entities.LeadRoutingRule", b =>
                 {
                     b.Navigation("Conditions");
                 });

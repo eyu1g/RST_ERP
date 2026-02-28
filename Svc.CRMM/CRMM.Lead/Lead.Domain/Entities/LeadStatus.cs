@@ -10,7 +10,7 @@ public class LeadStatus : BaseEntity
 
     public bool IsActive { get; set; }
 
-    public int SortOrder { get; set; }
+    public int Priority { get; set; }
 
 }
 

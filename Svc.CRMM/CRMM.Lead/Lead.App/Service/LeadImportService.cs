@@ -80,7 +80,7 @@ public sealed class LeadImportService
                 var now = DateTime.UtcNow;
 
                 var chosenSourceId = sourceId ?? _db.LeadSources.Select(x => x.Id).FirstOrDefault();
-                var chosenStatusId = statusId ?? _db.LeadStatuses.OrderBy(x => x.SortOrder).Select(x => x.Id).FirstOrDefault();
+                var chosenStatusId = statusId ?? _db.LeadStatuses.OrderBy(x => x.Priority).Select(x => x.Id).FirstOrDefault();
                 var chosenStageId = stageId ?? _db.LeadStages.OrderBy(x => x.SortOrder).Select(x => x.Id).FirstOrDefault();
 
                 if (chosenSourceId == Guid.Empty)

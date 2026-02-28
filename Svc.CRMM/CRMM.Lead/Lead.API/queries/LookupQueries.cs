@@ -17,8 +17,8 @@ public sealed class LookupQueries
     {
         return await _db.LeadStatuses
             .AsNoTracking()
-            .OrderBy(x => x.SortOrder)
-            .Select(x => new LookupItemDto(x.Id, x.Name, x.SortOrder))
+            .OrderBy(x => x.Priority)
+            .Select(x => new LookupItemDto(x.Id, x.Name, x.Priority))
             .ToListAsync(cancellationToken);
     }
 

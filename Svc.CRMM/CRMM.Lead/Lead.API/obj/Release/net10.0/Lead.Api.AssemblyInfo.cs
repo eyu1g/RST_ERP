@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Lead.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+196c8dbec91ca406eb19edfc1a38b3efaba2674d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dc4c0197d8f1c0ae4c21bacb9f012bf6aa583784")]
 [assembly: System.Reflection.AssemblyProductAttribute("Lead.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Lead.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

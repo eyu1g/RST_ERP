@@ -2,7 +2,9 @@ using Lead.App.Interfaces;
 using Lead.App.Service;
 using Lead.Api.Command;
 using Lead.Api.Queries;
+using Lead.Api.Mediator;
 using Lead.Utility.Persistence;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using Lead.Domain.Entities;
@@ -40,6 +42,13 @@ builder.Services.AddScoped<LeadImportService>();
 builder.Services.AddScoped<LeadQueries>();
 builder.Services.AddScoped<LeadGroupQueries>();
 builder.Services.AddScoped<LookupQueries>();
+builder.Services.AddScoped<LeadStatusAdminQueries>();
+builder.Services.AddScoped<LeadSourceAdminQueries>();
+builder.Services.AddScoped<LeadIndustryAdminQueries>();
+builder.Services.AddScoped<LeadScoringRuleQueries>();
+builder.Services.AddScoped<LeadRoutingRuleQueries>();
+
+builder.Services.AddMediatR(typeof(MediatorAssemblyMarker));
 
 builder.Services.AddScoped<CreateLeadCommand>();
 builder.Services.AddScoped<UpdateLeadCommand>();
@@ -49,6 +58,31 @@ builder.Services.AddScoped<AddLeadScoreCommand>();
 builder.Services.AddScoped<ConvertLeadCommand>();
 builder.Services.AddScoped<DeleteLeadCommand>();
 builder.Services.AddScoped<ImportLeadsCommand>();
+
+builder.Services.AddScoped<CreateLeadStatusAdminCommand>();
+builder.Services.AddScoped<UpdateLeadStatusAdminCommand>();
+builder.Services.AddScoped<SetLeadStatusActiveAdminCommand>();
+builder.Services.AddScoped<DeleteLeadStatusAdminCommand>();
+
+builder.Services.AddScoped<CreateLeadSourceAdminCommand>();
+builder.Services.AddScoped<UpdateLeadSourceAdminCommand>();
+builder.Services.AddScoped<SetLeadSourceActiveAdminCommand>();
+builder.Services.AddScoped<DeleteLeadSourceAdminCommand>();
+
+builder.Services.AddScoped<CreateLeadIndustryAdminCommand>();
+builder.Services.AddScoped<UpdateLeadIndustryAdminCommand>();
+builder.Services.AddScoped<SetLeadIndustryActiveAdminCommand>();
+builder.Services.AddScoped<DeleteLeadIndustryAdminCommand>();
+
+builder.Services.AddScoped<CreateLeadScoringRuleCommand>();
+builder.Services.AddScoped<UpdateLeadScoringRuleCommand>();
+builder.Services.AddScoped<SetLeadScoringRuleActiveCommand>();
+builder.Services.AddScoped<DeleteLeadScoringRuleCommand>();
+
+builder.Services.AddScoped<CreateLeadRoutingRuleCommand>();
+builder.Services.AddScoped<UpdateLeadRoutingRuleCommand>();
+builder.Services.AddScoped<SetLeadRoutingRuleActiveCommand>();
+builder.Services.AddScoped<DeleteLeadRoutingRuleCommand>();
 
 builder.Services.AddScoped<CreateLeadGroupCommand>();
 builder.Services.AddScoped<UpdateLeadGroupCommand>();
@@ -63,6 +97,8 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<LeadDbContext>();
 
+    var now = DateTime.UtcNow;
+
     db.Database.Migrate();
 
     if (!db.LeadSources.Any())
@@ -70,7 +106,11 @@ using (var scope = app.Services.CreateScope())
         db.LeadSources.Add(new LeadSource
         {
             Id = Guid.Parse("33333333-3333-3333-3333-333333333333"),
-            Name = "Manual"
+            Name = "Manual",
+            IsActive = true,
+            SortOrder = 0,
+            DateAdd = now,
+            DateMod = now
         });
     }
 
@@ -82,42 +122,54 @@ using (var scope = app.Services.CreateScope())
                 Id = Guid.Parse("11111111-1111-1111-1111-111111111111"),
                 Name = "New",
                 IsActive = true,
-                SortOrder = 0
+                Priority = 0,
+                DateAdd = now,
+                DateMod = now
             },
             new LeadStatus
             {
                 Id = Guid.Parse("11111111-1111-1111-1111-111111111112"),
                 Name = "Contacted",
                 IsActive = true,
-                SortOrder = 1
+                Priority = 1,
+                DateAdd = now,
+                DateMod = now
             },
             new LeadStatus
             {
                 Id = Guid.Parse("11111111-1111-1111-1111-111111111113"),
                 Name = "Qualified",
                 IsActive = true,
-                SortOrder = 2
+                Priority = 2,
+                DateAdd = now,
+                DateMod = now
             },
             new LeadStatus
             {
                 Id = Guid.Parse("11111111-1111-1111-1111-111111111114"),
                 Name = "Nurturing",
                 IsActive = true,
-                SortOrder = 3
+                Priority = 3,
+                DateAdd = now,
+                DateMod = now
             },
             new LeadStatus
             {
                 Id = Guid.Parse("11111111-1111-1111-1111-111111111115"),
                 Name = "Disqualified",
                 IsActive = true,
-                SortOrder = 4
+                Priority = 4,
+                DateAdd = now,
+                DateMod = now
             },
             new LeadStatus
             {
                 Id = Guid.Parse("11111111-1111-1111-1111-111111111116"),
                 Name = "Converted",
                 IsActive = true,
-                SortOrder = 5
+                Priority = 5,
+                DateAdd = now,
+                DateMod = now
             });
     }
 
@@ -129,42 +181,54 @@ using (var scope = app.Services.CreateScope())
                 Id = Guid.Parse("22222222-2222-2222-2222-222222222221"),
                 Name = "Capture",
                 IsActive = true,
-                SortOrder = 0
+                SortOrder = 0,
+                DateAdd = now,
+                DateMod = now
             },
             new LeadStage
             {
                 Id = Guid.Parse("22222222-2222-2222-2222-222222222222"),
                 Name = "Profiling",
                 IsActive = true,
-                SortOrder = 1
+                SortOrder = 1,
+                DateAdd = now,
+                DateMod = now
             },
             new LeadStage
             {
                 Id = Guid.Parse("22222222-2222-2222-2222-222222222223"),
                 Name = "Qualification",
                 IsActive = true,
-                SortOrder = 2
+                SortOrder = 2,
+                DateAdd = now,
+                DateMod = now
             },
             new LeadStage
             {
                 Id = Guid.Parse("22222222-2222-2222-2222-222222222224"),
                 Name = "Assignment",
                 IsActive = true,
-                SortOrder = 3
+                SortOrder = 3,
+                DateAdd = now,
+                DateMod = now
             },
             new LeadStage
             {
                 Id = Guid.Parse("22222222-2222-2222-2222-222222222225"),
                 Name = "Nurturing",
                 IsActive = true,
-                SortOrder = 4
+                SortOrder = 4,
+                DateAdd = now,
+                DateMod = now
             },
             new LeadStage
             {
                 Id = Guid.Parse("22222222-2222-2222-2222-222222222226"),
                 Name = "Conversion",
                 IsActive = true,
-                SortOrder = 5
+                SortOrder = 5,
+                DateAdd = now,
+                DateMod = now
             });
     }
 

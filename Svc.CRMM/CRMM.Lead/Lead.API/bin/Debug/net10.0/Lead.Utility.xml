@@ -76,5 +76,17 @@
         <member name="M:Lead.Utility.Persistence.Migrations.RenameAuditFieldsToBaseEntity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Lead.Utility.Persistence.Migrations.AddLeadAdminMasters">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.AddLeadAdminMasters.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.AddLeadAdminMasters.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.AddLeadAdminMasters.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>
