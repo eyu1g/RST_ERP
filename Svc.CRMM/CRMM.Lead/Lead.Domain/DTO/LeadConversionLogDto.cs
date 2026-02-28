@@ -6,4 +6,4 @@ public sealed record LeadConversionLogDto(
     string ConvertedTo,
     Guid? TargetId,
     string? ConvertedBy,
-    DateTimeOffset ConvertedAt);
+    DateTime ConvertedAt);

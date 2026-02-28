@@ -3,7 +3,9 @@ using Lead.Api.Queries;
 using Lead.Domain.DTO;
 using MediatR;
 
+
  namespace Lead.Api.Mediator;
+
 
 public static class LeadsRequests
 {

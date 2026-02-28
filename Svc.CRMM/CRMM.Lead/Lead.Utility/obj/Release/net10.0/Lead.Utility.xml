@@ -52,5 +52,17 @@
         <member name="M:Lead.Utility.Persistence.Migrations.AddLeadAssignment.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Lead.Utility.Persistence.Migrations.AddLeadCompanySize">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.AddLeadCompanySize.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.AddLeadCompanySize.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.AddLeadCompanySize.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

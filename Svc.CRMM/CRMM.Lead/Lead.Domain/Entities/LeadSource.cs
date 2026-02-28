@@ -1,15 +1,6 @@
 namespace Lead.Domain.Entities;
 
-public sealed class LeadSource
+public class LeadSource : BaseEntity
 {
-    public Guid Id { get; private set; }
-    public string Name { get; private set; } = string.Empty;
-
-    private LeadSource() { }
-
-    public LeadSource(Guid id, string name)
-    {
-        Id = id;
-        Name = name;
-    }
+    public string Name { get;  set; } = default!;
 }

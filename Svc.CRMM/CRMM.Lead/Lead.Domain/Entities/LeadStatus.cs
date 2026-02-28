@@ -1,24 +1,16 @@
 namespace Lead.Domain.Entities;
 
-public sealed class LeadStatus
+
+
+public class LeadStatus : BaseEntity
+
 {
-    public Guid Id { get; private set; }
-    public string Name { get; private set; } = string.Empty;
-    public bool IsActive { get; private set; }
-    public int SortOrder { get; private set; }
 
-    private LeadStatus() { }
+    public string Name { get;  set; } = default!;
 
-    public LeadStatus(Guid id, string name, bool isActive, int sortOrder)
-    {
-        Id = id;
-        Name = name;
-        IsActive = isActive;
-        SortOrder = sortOrder;
-    }
+    public bool IsActive { get; set; }
 
-    public void SetActive(bool isActive)
-    {
-        IsActive = isActive;
-    }
+    public int SortOrder { get; set; }
+
 }
+

@@ -5,4 +5,4 @@ public sealed record ConvertLeadResultDto(
     Guid ConversionLogId,
     Guid StatusId,
     Guid StageId,
-    DateTimeOffset ConvertedAt);
+    DateTime ConvertedAt);

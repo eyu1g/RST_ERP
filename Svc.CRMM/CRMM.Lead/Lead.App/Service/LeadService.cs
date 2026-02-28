@@ -22,7 +22,7 @@ public sealed class LeadService
     {
         var items = await _db.Leads
             .AsNoTracking()
-            .OrderByDescending(x => x.CreatedAt)
+            .OrderByDescending(x => x.DateAdd)
             .ToListAsync(cancellationToken);
 
         return items.Select(ToDto).ToList();
@@ -33,7 +33,7 @@ public sealed class LeadService
         var leads = await _db.Leads
             .AsNoTracking()
             .Where(x => x.AssignedToUserId != null)
-            .OrderByDescending(x => x.UpdatedAt)
+            .OrderByDescending(x => x.DateMod ?? x.DateAdd)
             .ToListAsync(cancellationToken);
 
         var sourceIds = leads.Select(x => x.SourceId).Distinct().ToList();
@@ -77,7 +77,7 @@ public sealed class LeadService
             LatestScore: latestScores.TryGetValue(l.Id, out var score) ? score : null,
             AssignedToUserId: l.AssignedToUserId,
             AssignedToName: l.AssignedToName,
-            UpdatedAt: l.UpdatedAt)).ToList();
+            UpdatedAt: l.DateMod ?? l.DateAdd)).ToList();
     }
 
     public async Task<LeadDto?> GetAsync(Guid id, CancellationToken cancellationToken)
@@ -130,7 +130,7 @@ public sealed class LeadService
 
     public async Task<LeadDto> CreateAsync(CreateLeadRequest request, CancellationToken cancellationToken)
     {
-        var now = DateTimeOffset.UtcNow;
+        var now = DateTime.UtcNow;
 
         var sourceId = request.SourceId ?? await _db.LeadSources
             .AsNoTracking()
@@ -164,26 +164,28 @@ public sealed class LeadService
             throw new InvalidOperationException("No LeadSource rows exist. Seed LeadSource before creating a Lead.");
         }
 
-        var lead = new LeadEntity(
-            id: Guid.NewGuid(),
-            leadNo: LeadNoGenerator.NewLeadNo(now),
-            firstName: request.FirstName,
-            lastName: request.LastName,
-            companyName: request.CompanyName,
-            companySize: request.CompanySize,
-            jobTitle: request.JobTitle,
-            industry: request.Industry,
-            budget: request.Budget,
-            timeline: request.Timeline,
-            email: request.Email,
-            phone: request.Phone,
-            sourceId: sourceId,
-            statusId: statusId,
-            stageId: stageId,
-            assignedToUserId: null,
-            assignedToName: null,
-            createdAt: now,
-            updatedAt: now);
+        var lead = new LeadEntity
+        {
+            Id = Guid.NewGuid(),
+            LeadNo = LeadNoGenerator.NewLeadNo(now),
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            CompanyName = request.CompanyName,
+            CompanySize = request.CompanySize,
+            JobTitle = request.JobTitle,
+            Industry = request.Industry,
+            Budget = request.Budget,
+            Timeline = request.Timeline,
+            Email = request.Email,
+            Phone = request.Phone,
+            SourceId = sourceId,
+            StatusId = statusId,
+            StageId = stageId,
+            AssignedToUserId = null,
+            AssignedToName = null,
+            DateAdd = now,
+            DateMod = now
+        };
 
         _db.Leads.Add(lead);
         await _db.SaveChangesAsync(cancellationToken);
@@ -198,8 +200,10 @@ public sealed class LeadService
             return null;
         }
 
-        var now = DateTimeOffset.UtcNow;
-        lead.SetAssignment(request.AssignedToUserId, request.AssignedToName, now);
+        var now = DateTime.UtcNow;
+        lead.AssignedToUserId = request.AssignedToUserId;
+        lead.AssignedToName = request.AssignedToName;
+        lead.DateMod = now;
         await _db.SaveChangesAsync(cancellationToken);
         return ToDto(lead);
     }
@@ -212,22 +216,9 @@ public sealed class LeadService
             return null;
         }
 
-        var now = DateTimeOffset.UtcNow;
-        lead.UpdateBasics(
-            firstName: lead.FirstName,
-            lastName: lead.LastName,
-            companyName: lead.CompanyName,
-            companySize: lead.CompanySize,
-            jobTitle: lead.JobTitle,
-            industry: lead.Industry,
-            budget: lead.Budget,
-            timeline: lead.Timeline,
-            email: lead.Email,
-            phone: lead.Phone,
-            sourceId: lead.SourceId,
-            statusId: request.StatusId,
-            stageId: lead.StageId,
-            updatedAt: now);
+        var now = DateTime.UtcNow;
+        lead.StatusId = request.StatusId;
+        lead.DateMod = now;
 
         await _db.SaveChangesAsync(cancellationToken);
         return ToDto(lead);
@@ -244,13 +235,15 @@ public sealed class LeadService
             return null;
         }
 
-        var now = DateTimeOffset.UtcNow;
-        var entity = new Lead.Domain.Entities.LeadScoreHistory(
-            id: Guid.NewGuid(),
-            leadId: id,
-            score: request.Score,
-            reason: request.Reason,
-            scoredAt: now);
+        var now = DateTime.UtcNow;
+        var entity = new Lead.Domain.Entities.LeadScoreHistory
+        {
+            Id = Guid.NewGuid(),
+            LeadId = id,
+            Score = request.Score,
+            Reason = request.Reason,
+            ScoredAt = now
+        };
 
         _db.LeadScoreHistories.Add(entity);
         await _db.SaveChangesAsync(cancellationToken);
@@ -266,7 +259,7 @@ public sealed class LeadService
             return null;
         }
 
-        var now = DateTimeOffset.UtcNow;
+        var now = DateTime.UtcNow;
 
         var convertedToParts = new List<string>();
         if (request.CreateContact) convertedToParts.Add("Contact");
@@ -274,31 +267,21 @@ public sealed class LeadService
         if (request.CreateOpportunity) convertedToParts.Add("Opportunity");
         var convertedTo = convertedToParts.Count == 0 ? "Converted" : string.Join(",", convertedToParts);
 
-        var log = new Lead.Domain.Entities.LeadConversionLog(
-            id: Guid.NewGuid(),
-            leadId: id,
-            convertedTo: convertedTo,
-            targetId: null,
-            convertedBy: request.ConvertedBy,
-            convertedAt: now);
+        var log = new Lead.Domain.Entities.LeadConversionLog
+        {
+            Id = Guid.NewGuid(),
+            LeadId = id,
+            ConvertedTo = convertedTo,
+            TargetId = null,
+            ConvertedBy = request.ConvertedBy,
+            ConvertedAt = now
+        };
 
         _db.LeadConversionLogs.Add(log);
 
-        lead.UpdateBasics(
-            firstName: lead.FirstName,
-            lastName: lead.LastName,
-            companyName: lead.CompanyName,
-            companySize: lead.CompanySize,
-            jobTitle: lead.JobTitle,
-            industry: lead.Industry,
-            budget: lead.Budget,
-            timeline: lead.Timeline,
-            email: lead.Email,
-            phone: lead.Phone,
-            sourceId: lead.SourceId,
-            statusId: ConvertedStatusId,
-            stageId: ConversionStageId,
-            updatedAt: now);
+        lead.StatusId = ConvertedStatusId;
+        lead.StageId = ConversionStageId;
+        lead.DateMod = now;
 
         await _db.SaveChangesAsync(cancellationToken);
 
@@ -318,22 +301,21 @@ public sealed class LeadService
             return null;
         }
 
-        var now = DateTimeOffset.UtcNow;
-        lead.UpdateBasics(
-            firstName: request.FirstName,
-            lastName: request.LastName,
-            companyName: request.CompanyName,
-            companySize: request.CompanySize,
-            jobTitle: request.JobTitle,
-            industry: request.Industry,
-            budget: request.Budget,
-            timeline: request.Timeline,
-            email: request.Email,
-            phone: request.Phone,
-            sourceId: request.SourceId,
-            statusId: request.StatusId,
-            stageId: request.StageId,
-            updatedAt: now);
+        var now = DateTime.UtcNow;
+        lead.FirstName = request.FirstName;
+        lead.LastName = request.LastName;
+        lead.CompanyName = request.CompanyName;
+        lead.CompanySize = request.CompanySize;
+        lead.JobTitle = request.JobTitle;
+        lead.Industry = request.Industry;
+        lead.Budget = request.Budget;
+        lead.Timeline = request.Timeline;
+        lead.Email = request.Email;
+        lead.Phone = request.Phone;
+        lead.SourceId = request.SourceId;
+        lead.StatusId = request.StatusId;
+        lead.StageId = request.StageId;
+        lead.DateMod = now;
 
         await _db.SaveChangesAsync(cancellationToken);
         return ToDto(lead);
@@ -370,6 +352,6 @@ public sealed class LeadService
         lead.StageId,
         lead.AssignedToUserId,
         lead.AssignedToName,
-        lead.CreatedAt,
-        lead.UpdatedAt);
+        lead.DateAdd,
+        lead.DateMod ?? lead.DateAdd);
 }

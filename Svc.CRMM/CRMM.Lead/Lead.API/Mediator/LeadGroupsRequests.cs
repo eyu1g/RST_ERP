@@ -4,7 +4,9 @@ using Lead.App.Service;
 using Lead.Domain.DTO;
 using MediatR;
 
- namespace Lead.Api.Mediator;
+
+namespace Lead.Api.Mediator;
+
 
 public static class LeadGroupsRequests
 {

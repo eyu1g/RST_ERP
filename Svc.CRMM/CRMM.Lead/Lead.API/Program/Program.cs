@@ -1,5 +1,7 @@
-using Lead.App.Service;
 using Lead.App.Interfaces;
+using Lead.App.Service;
+using Lead.Api.Command;
+using Lead.Api.Queries;
 using Lead.Utility.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
@@ -32,11 +34,28 @@ builder.Services.AddDbContext<LeadDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("LeadDb")));
 
 builder.Services.AddScoped<ILeadDbContext>(sp => sp.GetRequiredService<LeadDbContext>());
-builder.Services.AddScoped<LeadService>();
-builder.Services.AddScoped<LeadGroupService>();
-builder.Services.AddScoped<LeadLookupService>();
 builder.Services.AddSingleton<LeadGroupSettingsService>();
 builder.Services.AddScoped<LeadImportService>();
+
+builder.Services.AddScoped<LeadQueries>();
+builder.Services.AddScoped<LeadGroupQueries>();
+builder.Services.AddScoped<LookupQueries>();
+
+builder.Services.AddScoped<CreateLeadCommand>();
+builder.Services.AddScoped<UpdateLeadCommand>();
+builder.Services.AddScoped<ChangeLeadStatusCommand>();
+builder.Services.AddScoped<AssignLeadCommand>();
+builder.Services.AddScoped<AddLeadScoreCommand>();
+builder.Services.AddScoped<ConvertLeadCommand>();
+builder.Services.AddScoped<DeleteLeadCommand>();
+builder.Services.AddScoped<ImportLeadsCommand>();
+
+builder.Services.AddScoped<CreateLeadGroupCommand>();
+builder.Services.AddScoped<UpdateLeadGroupCommand>();
+builder.Services.AddScoped<DeleteLeadGroupCommand>();
+builder.Services.AddScoped<CreateLeadGroupConditionCommand>();
+builder.Services.AddScoped<UpdateLeadGroupConditionCommand>();
+builder.Services.AddScoped<DeleteLeadGroupConditionCommand>();
 
 var app = builder.Build();
 
@@ -48,29 +67,105 @@ using (var scope = app.Services.CreateScope())
 
     if (!db.LeadSources.Any())
     {
-        db.LeadSources.Add(new LeadSource(Guid.Parse("33333333-3333-3333-3333-333333333333"), "Manual"));
+        db.LeadSources.Add(new LeadSource
+        {
+            Id = Guid.Parse("33333333-3333-3333-3333-333333333333"),
+            Name = "Manual"
+        });
     }
 
     if (!db.LeadStatuses.Any())
     {
         db.LeadStatuses.AddRange(
-            new LeadStatus(Guid.Parse("11111111-1111-1111-1111-111111111111"), "New", true, 0),
-            new LeadStatus(Guid.Parse("11111111-1111-1111-1111-111111111112"), "Contacted", true, 1),
-            new LeadStatus(Guid.Parse("11111111-1111-1111-1111-111111111113"), "Qualified", true, 2),
-            new LeadStatus(Guid.Parse("11111111-1111-1111-1111-111111111114"), "Nurturing", true, 3),
-            new LeadStatus(Guid.Parse("11111111-1111-1111-1111-111111111115"), "Disqualified", true, 4),
-            new LeadStatus(Guid.Parse("11111111-1111-1111-1111-111111111116"), "Converted", true, 5));
+            new LeadStatus
+            {
+                Id = Guid.Parse("11111111-1111-1111-1111-111111111111"),
+                Name = "New",
+                IsActive = true,
+                SortOrder = 0
+            },
+            new LeadStatus
+            {
+                Id = Guid.Parse("11111111-1111-1111-1111-111111111112"),
+                Name = "Contacted",
+                IsActive = true,
+                SortOrder = 1
+            },
+            new LeadStatus
+            {
+                Id = Guid.Parse("11111111-1111-1111-1111-111111111113"),
+                Name = "Qualified",
+                IsActive = true,
+                SortOrder = 2
+            },
+            new LeadStatus
+            {
+                Id = Guid.Parse("11111111-1111-1111-1111-111111111114"),
+                Name = "Nurturing",
+                IsActive = true,
+                SortOrder = 3
+            },
+            new LeadStatus
+            {
+                Id = Guid.Parse("11111111-1111-1111-1111-111111111115"),
+                Name = "Disqualified",
+                IsActive = true,
+                SortOrder = 4
+            },
+            new LeadStatus
+            {
+                Id = Guid.Parse("11111111-1111-1111-1111-111111111116"),
+                Name = "Converted",
+                IsActive = true,
+                SortOrder = 5
+            });
     }
 
     if (!db.LeadStages.Any())
     {
         db.LeadStages.AddRange(
-            new LeadStage(Guid.Parse("22222222-2222-2222-2222-222222222221"), "Capture", true, 0),
-            new LeadStage(Guid.Parse("22222222-2222-2222-2222-222222222222"), "Profiling", true, 1),
-            new LeadStage(Guid.Parse("22222222-2222-2222-2222-222222222223"), "Qualification", true, 2),
-            new LeadStage(Guid.Parse("22222222-2222-2222-2222-222222222224"), "Assignment", true, 3),
-            new LeadStage(Guid.Parse("22222222-2222-2222-2222-222222222225"), "Nurturing", true, 4),
-            new LeadStage(Guid.Parse("22222222-2222-2222-2222-222222222226"), "Conversion", true, 5));
+            new LeadStage
+            {
+                Id = Guid.Parse("22222222-2222-2222-2222-222222222221"),
+                Name = "Capture",
+                IsActive = true,
+                SortOrder = 0
+            },
+            new LeadStage
+            {
+                Id = Guid.Parse("22222222-2222-2222-2222-222222222222"),
+                Name = "Profiling",
+                IsActive = true,
+                SortOrder = 1
+            },
+            new LeadStage
+            {
+                Id = Guid.Parse("22222222-2222-2222-2222-222222222223"),
+                Name = "Qualification",
+                IsActive = true,
+                SortOrder = 2
+            },
+            new LeadStage
+            {
+                Id = Guid.Parse("22222222-2222-2222-2222-222222222224"),
+                Name = "Assignment",
+                IsActive = true,
+                SortOrder = 3
+            },
+            new LeadStage
+            {
+                Id = Guid.Parse("22222222-2222-2222-2222-222222222225"),
+                Name = "Nurturing",
+                IsActive = true,
+                SortOrder = 4
+            },
+            new LeadStage
+            {
+                Id = Guid.Parse("22222222-2222-2222-2222-222222222226"),
+                Name = "Conversion",
+                IsActive = true,
+                SortOrder = 5
+            });
     }
 
     db.SaveChanges();

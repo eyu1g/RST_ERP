@@ -5,4 +5,4 @@ public sealed record LeadScoreHistoryDto(
     Guid LeadId,
     int Score,
     string? Reason,
-    DateTimeOffset ScoredAt);
+    DateTime ScoredAt);

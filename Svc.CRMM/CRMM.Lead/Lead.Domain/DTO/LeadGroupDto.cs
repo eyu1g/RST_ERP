@@ -6,5 +6,5 @@ public sealed record LeadGroupDto(
     string Name,
     bool IsActive,
     int LeadCount,
-    DateTimeOffset CreatedAt,
-    DateTimeOffset UpdatedAt);
+    DateTime CreatedAt,
+    DateTime UpdatedAt);

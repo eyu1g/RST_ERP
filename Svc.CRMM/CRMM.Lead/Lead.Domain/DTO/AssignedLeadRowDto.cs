@@ -16,4 +16,4 @@ public sealed record AssignedLeadRowDto(
     int? LatestScore,
     Guid? AssignedToUserId,
     string? AssignedToName,
-    DateTimeOffset UpdatedAt);
+    DateTime UpdatedAt);
