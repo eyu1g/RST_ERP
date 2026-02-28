@@ -64,5 +64,17 @@
         <member name="M:Lead.Utility.Persistence.Migrations.AddLeadCompanySize.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Lead.Utility.Persistence.Migrations.RenameAuditFieldsToBaseEntity">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.RenameAuditFieldsToBaseEntity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.RenameAuditFieldsToBaseEntity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Lead.Utility.Persistence.Migrations.RenameAuditFieldsToBaseEntity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>
