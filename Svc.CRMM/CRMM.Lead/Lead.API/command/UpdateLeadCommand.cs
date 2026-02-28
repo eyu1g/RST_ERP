@@ -32,7 +32,7 @@ public sealed class UpdateLeadCommand
         lead.SourceId = request.SourceId;
         lead.StatusId = request.StatusId;
         lead.StageId = request.StageId;
-        lead.UpdatedAt = now;
+        lead.DateMod = now;
 
         await _db.SaveChangesAsync(cancellationToken);
 
@@ -54,7 +54,7 @@ public sealed class UpdateLeadCommand
             lead.StageId,
             lead.AssignedToUserId,
             lead.AssignedToName,
-            lead.CreatedAt,
-            lead.UpdatedAt);
+            lead.DateAdd,
+            lead.DateMod ?? lead.DateAdd);
     }
 }

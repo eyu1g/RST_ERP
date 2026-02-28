@@ -22,13 +22,13 @@ public sealed class CreateLeadGroupCommand
             Code = request.Code,
             Name = request.Name,
             IsActive = request.IsActive,
-            CreatedAt = now,
-            UpdatedAt = now
+            DateAdd = now,
+            DateMod = now
         };
 
         _db.LeadGroups.Add(entity);
         await _db.SaveChangesAsync(cancellationToken);
 
-        return new LeadGroupDto(entity.Id, entity.Code, entity.Name, entity.IsActive, 0, entity.CreatedAt, entity.UpdatedAt);
+        return new LeadGroupDto(entity.Id, entity.Code, entity.Name, entity.IsActive, 0, entity.DateAdd, entity.DateMod ?? entity.DateAdd);
     }
 }

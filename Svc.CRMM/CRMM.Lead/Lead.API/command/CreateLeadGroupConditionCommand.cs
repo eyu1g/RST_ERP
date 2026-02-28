@@ -28,13 +28,13 @@ public sealed class CreateLeadGroupConditionCommand
             Field = request.Field,
             Operator = request.Operator,
             Value = request.Value,
-            CreatedAt = now,
-            UpdatedAt = now
+            DateAdd = now,
+            DateMod = now
         };
 
         _db.LeadGroupConditions.Add(entity);
         await _db.SaveChangesAsync(cancellationToken);
 
-        return new LeadGroupConditionDto(entity.Id, entity.LeadGroupId, entity.SortOrder, entity.Field, entity.Operator, entity.Value, entity.CreatedAt, entity.UpdatedAt);
+        return new LeadGroupConditionDto(entity.Id, entity.LeadGroupId, entity.SortOrder, entity.Field, entity.Operator, entity.Value, entity.DateAdd, entity.DateMod ?? entity.DateAdd);
     }
 }

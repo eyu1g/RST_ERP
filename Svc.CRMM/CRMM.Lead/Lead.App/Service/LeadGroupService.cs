@@ -40,8 +40,8 @@ public sealed class LeadGroupService
                 g.Name,
                 g.IsActive,
                 leadCounts.TryGetValue(g.Id, out var count) ? count : 0,
-                g.CreatedAt,
-                g.UpdatedAt))
+                g.DateAdd,
+                g.DateMod ?? g.DateAdd))
             .ToList();
     }
 
@@ -65,7 +65,7 @@ public sealed class LeadGroupService
         var leadCounts = await ComputeLeadCountsAsync(new[] { group }, conditions, cancellationToken);
         var leadCount = leadCounts.TryGetValue(group.Id, out var count) ? count : 0;
 
-        var groupDto = new LeadGroupDto(group.Id, group.Code, group.Name, group.IsActive, leadCount, group.CreatedAt, group.UpdatedAt);
+        var groupDto = new LeadGroupDto(group.Id, group.Code, group.Name, group.IsActive, leadCount, group.DateAdd, group.DateMod ?? group.DateAdd);
         var conditionDtos = conditions.Select(ToDto).ToList();
 
         return (groupDto, conditionDtos);
@@ -81,14 +81,14 @@ public sealed class LeadGroupService
             Code = request.Code,
             Name = request.Name,
             IsActive = request.IsActive,
-            CreatedAt = now,
-            UpdatedAt = now
+            DateAdd = now,
+            DateMod = now
         };
 
         _db.LeadGroups.Add(entity);
         await _db.SaveChangesAsync(cancellationToken);
 
-        return new LeadGroupDto(entity.Id, entity.Code, entity.Name, entity.IsActive, 0, entity.CreatedAt, entity.UpdatedAt);
+        return new LeadGroupDto(entity.Id, entity.Code, entity.Name, entity.IsActive, 0, entity.DateAdd, entity.DateMod ?? entity.DateAdd);
     }
 
     public async Task<LeadGroupDto?> UpdateAsync(Guid id, UpdateLeadGroupRequest request, CancellationToken cancellationToken)
@@ -103,7 +103,7 @@ public sealed class LeadGroupService
         entity.Code = request.Code;
         entity.Name = request.Name;
         entity.IsActive = request.IsActive;
-        entity.UpdatedAt = now;
+        entity.DateMod = now;
 
         await _db.SaveChangesAsync(cancellationToken);
 
@@ -115,7 +115,7 @@ public sealed class LeadGroupService
         var leadCounts = await ComputeLeadCountsAsync(new[] { entity }, conditions, cancellationToken);
         var leadCount = leadCounts.TryGetValue(entity.Id, out var count) ? count : 0;
 
-        return new LeadGroupDto(entity.Id, entity.Code, entity.Name, entity.IsActive, leadCount, entity.CreatedAt, entity.UpdatedAt);
+        return new LeadGroupDto(entity.Id, entity.Code, entity.Name, entity.IsActive, leadCount, entity.DateAdd, entity.DateMod ?? entity.DateAdd);
     }
 
     public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken)
@@ -164,8 +164,8 @@ public sealed class LeadGroupService
             Field = request.Field,
             Operator = request.Operator,
             Value = request.Value,
-            CreatedAt = now,
-            UpdatedAt = now
+            DateAdd = now,
+            DateMod = now
         };
 
         _db.LeadGroupConditions.Add(entity);
@@ -187,7 +187,7 @@ public sealed class LeadGroupService
         entity.Field = request.Field;
         entity.Operator = request.Operator;
         entity.Value = request.Value;
-        entity.UpdatedAt = now;
+        entity.DateMod = now;
         await _db.SaveChangesAsync(cancellationToken);
 
         return ToDto(entity);
@@ -398,6 +398,6 @@ public sealed class LeadGroupService
         condition.Field,
         condition.Operator,
         condition.Value,
-        condition.CreatedAt,
-        condition.UpdatedAt);
+        condition.DateAdd,
+        condition.DateMod ?? condition.DateAdd);
 }

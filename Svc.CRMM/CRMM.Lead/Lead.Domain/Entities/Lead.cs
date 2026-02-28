@@ -11,22 +11,21 @@ public class Lead : BaseEntity
 
     public string JobTitle { get;set; }=null!;
     public string Industry { get;set; }=null!;
-    public decimal Budget { get;set; }=null!;
+    public decimal? Budget { get;set; }
     public string Timeline { get;set; }=null!;
 
     public string Email { get;set; }=null!;
     public string Phone { get;set; }=null!;
 
-    public Guid? SourceId { get;set; }
+    public Guid SourceId { get;set; }
 
-    public Guid? StatusId { get;set; }=default!;
+    public Guid StatusId { get;set; }
 
-    public Guid StageId { get;set; }=null!;
+    public Guid StageId { get;set; }
 
     public Guid? AssignedToUserId { get; set; }=null!;
 
-    public DateTime CreatedAt { get;set; }
-    public DateTime UpdatedAt { get;set; }
+    public string? AssignedToName { get; set; }
 
     public virtual LeadSource Source { get;set; }=null!;
     public virtual LeadStatus Status { get;set; }=null!;

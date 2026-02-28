@@ -20,7 +20,7 @@ public sealed class ChangeLeadStatusCommand
 
         var now = DateTime.UtcNow;
         lead.StatusId = request.StatusId;
-        lead.UpdatedAt = now;
+        lead.DateMod = now;
 
         await _db.SaveChangesAsync(cancellationToken);
 
@@ -42,7 +42,7 @@ public sealed class ChangeLeadStatusCommand
             lead.StageId,
             lead.AssignedToUserId,
             lead.AssignedToName,
-            lead.CreatedAt,
-            lead.UpdatedAt);
+            lead.DateAdd,
+            lead.DateMod ?? lead.DateAdd);
     }
 }

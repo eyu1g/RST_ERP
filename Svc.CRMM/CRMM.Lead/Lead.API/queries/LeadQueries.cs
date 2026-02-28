@@ -17,7 +17,7 @@ public sealed class LeadQueries
     {
         var items = await _db.Leads
             .AsNoTracking()
-            .OrderByDescending(x => x.CreatedAt)
+            .OrderByDescending(x => x.DateAdd)
             .ToListAsync(cancellationToken);
 
         return items.Select(ToDto).ToList();
@@ -28,7 +28,7 @@ public sealed class LeadQueries
         var leads = await _db.Leads
             .AsNoTracking()
             .Where(x => x.AssignedToUserId != null)
-            .OrderByDescending(x => x.UpdatedAt)
+            .OrderByDescending(x => x.DateMod ?? x.DateAdd)
             .ToListAsync(cancellationToken);
 
         var sourceIds = leads.Select(x => x.SourceId).Distinct().ToList();
@@ -72,7 +72,7 @@ public sealed class LeadQueries
             LatestScore: latestScores.TryGetValue(l.Id, out var score) ? score : null,
             AssignedToUserId: l.AssignedToUserId,
             AssignedToName: l.AssignedToName,
-            UpdatedAt: l.UpdatedAt)).ToList();
+            UpdatedAt: l.DateMod ?? l.DateAdd)).ToList();
     }
 
     public async Task<LeadDto?> GetAsync(Guid id, CancellationToken cancellationToken)
@@ -138,6 +138,6 @@ public sealed class LeadQueries
         lead.StageId,
         lead.AssignedToUserId,
         lead.AssignedToName,
-        lead.CreatedAt,
-        lead.UpdatedAt);
+        lead.DateAdd,
+        lead.DateMod ?? lead.DateAdd);
 }

@@ -117,8 +117,8 @@ public sealed class LeadImportService
                     StageId = chosenStageId,
                     AssignedToUserId = assignedToUserId,
                     AssignedToName = assignedToName,
-                    CreatedAt = now,
-                    UpdatedAt = now
+                    DateAdd = now,
+                    DateMod = now
                 };
 
                 _db.Leads.Add(lead);

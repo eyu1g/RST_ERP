@@ -10,7 +10,4 @@ public class LeadGroupCondition : BaseEntity
     public string Field { get;set; } = default!;
     public string Operator { get;set; } = default!;
     public string Value { get;set; } = default!;
-
-    public DateTime CreatedAt { get;set; }
-    public DateTime UpdatedAt { get;set; }
 }

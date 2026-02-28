@@ -21,7 +21,7 @@ public sealed class AssignLeadCommand
         var now = DateTime.UtcNow;
         lead.AssignedToUserId = request.AssignedToUserId;
         lead.AssignedToName = request.AssignedToName;
-        lead.UpdatedAt = now;
+        lead.DateMod = now;
 
         await _db.SaveChangesAsync(cancellationToken);
 
@@ -43,7 +43,7 @@ public sealed class AssignLeadCommand
             lead.StageId,
             lead.AssignedToUserId,
             lead.AssignedToName,
-            lead.CreatedAt,
-            lead.UpdatedAt);
+            lead.DateAdd,
+            lead.DateMod ?? lead.DateAdd);
     }
 }

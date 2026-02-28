@@ -37,8 +37,8 @@ public sealed class LeadGroupQueries
                 g.Name,
                 g.IsActive,
                 leadCounts.TryGetValue(g.Id, out var count) ? count : 0,
-                g.CreatedAt,
-                g.UpdatedAt))
+                g.DateAdd,
+                g.DateMod ?? g.DateAdd))
             .ToList();
     }
 
@@ -59,7 +59,7 @@ public sealed class LeadGroupQueries
         var leadCounts = await ComputeLeadCountsAsync(new[] { group }, conditions, cancellationToken);
         var leadCount = leadCounts.TryGetValue(group.Id, out var count) ? count : 0;
 
-        var groupDto = new LeadGroupDto(group.Id, group.Code, group.Name, group.IsActive, leadCount, group.CreatedAt, group.UpdatedAt);
+        var groupDto = new LeadGroupDto(group.Id, group.Code, group.Name, group.IsActive, leadCount, group.DateAdd, group.DateMod ?? group.DateAdd);
         var conditionDtos = conditions.Select(ToDto).ToList();
 
         return (groupDto, conditionDtos);
@@ -217,6 +217,6 @@ public sealed class LeadGroupQueries
         condition.Field,
         condition.Operator,
         condition.Value,
-        condition.CreatedAt,
-        condition.UpdatedAt);
+        condition.DateAdd,
+        condition.DateMod ?? condition.DateAdd);
 }

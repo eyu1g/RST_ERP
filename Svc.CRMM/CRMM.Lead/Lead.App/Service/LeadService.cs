@@ -22,7 +22,7 @@ public sealed class LeadService
     {
         var items = await _db.Leads
             .AsNoTracking()
-            .OrderByDescending(x => x.CreatedAt)
+            .OrderByDescending(x => x.DateAdd)
             .ToListAsync(cancellationToken);
 
         return items.Select(ToDto).ToList();
@@ -33,7 +33,7 @@ public sealed class LeadService
         var leads = await _db.Leads
             .AsNoTracking()
             .Where(x => x.AssignedToUserId != null)
-            .OrderByDescending(x => x.UpdatedAt)
+            .OrderByDescending(x => x.DateMod ?? x.DateAdd)
             .ToListAsync(cancellationToken);
 
         var sourceIds = leads.Select(x => x.SourceId).Distinct().ToList();
@@ -77,7 +77,7 @@ public sealed class LeadService
             LatestScore: latestScores.TryGetValue(l.Id, out var score) ? score : null,
             AssignedToUserId: l.AssignedToUserId,
             AssignedToName: l.AssignedToName,
-            UpdatedAt: l.UpdatedAt)).ToList();
+            UpdatedAt: l.DateMod ?? l.DateAdd)).ToList();
     }
 
     public async Task<LeadDto?> GetAsync(Guid id, CancellationToken cancellationToken)
@@ -183,8 +183,8 @@ public sealed class LeadService
             StageId = stageId,
             AssignedToUserId = null,
             AssignedToName = null,
-            CreatedAt = now,
-            UpdatedAt = now
+            DateAdd = now,
+            DateMod = now
         };
 
         _db.Leads.Add(lead);
@@ -203,7 +203,7 @@ public sealed class LeadService
         var now = DateTime.UtcNow;
         lead.AssignedToUserId = request.AssignedToUserId;
         lead.AssignedToName = request.AssignedToName;
-        lead.UpdatedAt = now;
+        lead.DateMod = now;
         await _db.SaveChangesAsync(cancellationToken);
         return ToDto(lead);
     }
@@ -218,7 +218,7 @@ public sealed class LeadService
 
         var now = DateTime.UtcNow;
         lead.StatusId = request.StatusId;
-        lead.UpdatedAt = now;
+        lead.DateMod = now;
 
         await _db.SaveChangesAsync(cancellationToken);
         return ToDto(lead);
@@ -281,7 +281,7 @@ public sealed class LeadService
 
         lead.StatusId = ConvertedStatusId;
         lead.StageId = ConversionStageId;
-        lead.UpdatedAt = now;
+        lead.DateMod = now;
 
         await _db.SaveChangesAsync(cancellationToken);
 
@@ -315,7 +315,7 @@ public sealed class LeadService
         lead.SourceId = request.SourceId;
         lead.StatusId = request.StatusId;
         lead.StageId = request.StageId;
-        lead.UpdatedAt = now;
+        lead.DateMod = now;
 
         await _db.SaveChangesAsync(cancellationToken);
         return ToDto(lead);
@@ -352,6 +352,6 @@ public sealed class LeadService
         lead.StageId,
         lead.AssignedToUserId,
         lead.AssignedToName,
-        lead.CreatedAt,
-        lead.UpdatedAt);
+        lead.DateAdd,
+        lead.DateMod ?? lead.DateAdd);
 }

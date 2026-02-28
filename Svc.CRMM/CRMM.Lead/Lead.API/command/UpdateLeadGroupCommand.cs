@@ -22,10 +22,10 @@ public sealed class UpdateLeadGroupCommand
         entity.Code = request.Code;
         entity.Name = request.Name;
         entity.IsActive = request.IsActive;
-        entity.UpdatedAt = now;
+        entity.DateMod = now;
 
         await _db.SaveChangesAsync(cancellationToken);
 
-        return new LeadGroupDto(entity.Id, entity.Code, entity.Name, entity.IsActive, 0, entity.CreatedAt, entity.UpdatedAt);
+        return new LeadGroupDto(entity.Id, entity.Code, entity.Name, entity.IsActive, 0, entity.DateAdd, entity.DateMod ?? entity.DateAdd);
     }
 }

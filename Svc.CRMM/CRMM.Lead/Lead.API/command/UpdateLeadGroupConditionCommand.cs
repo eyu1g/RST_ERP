@@ -23,10 +23,10 @@ public sealed class UpdateLeadGroupConditionCommand
         entity.Field = request.Field;
         entity.Operator = request.Operator;
         entity.Value = request.Value;
-        entity.UpdatedAt = now;
+        entity.DateMod = now;
 
         await _db.SaveChangesAsync(cancellationToken);
 
-        return new LeadGroupConditionDto(entity.Id, entity.LeadGroupId, entity.SortOrder, entity.Field, entity.Operator, entity.Value, entity.CreatedAt, entity.UpdatedAt);
+        return new LeadGroupConditionDto(entity.Id, entity.LeadGroupId, entity.SortOrder, entity.Field, entity.Operator, entity.Value, entity.DateAdd, entity.DateMod ?? entity.DateAdd);
     }
 }

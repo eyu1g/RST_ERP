@@ -43,7 +43,7 @@ public sealed class ConvertLeadCommand
 
         lead.StatusId = ConvertedStatusId;
         lead.StageId = ConversionStageId;
-        lead.UpdatedAt = now;
+        lead.DateMod = now;
 
         await _db.SaveChangesAsync(cancellationToken);
 

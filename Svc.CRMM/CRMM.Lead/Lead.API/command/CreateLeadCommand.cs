@@ -63,8 +63,8 @@ public sealed class CreateLeadCommand
             StageId = stageId,
             AssignedToUserId = null,
             AssignedToName = null,
-            CreatedAt = now,
-            UpdatedAt = now
+            DateAdd = now,
+            DateMod = now
         };
 
         _db.Leads.Add(lead);
@@ -88,7 +88,7 @@ public sealed class CreateLeadCommand
             lead.StageId,
             lead.AssignedToUserId,
             lead.AssignedToName,
-            lead.CreatedAt,
-            lead.UpdatedAt);
+            lead.DateAdd,
+            lead.DateMod ?? lead.DateAdd);
     }
 }
